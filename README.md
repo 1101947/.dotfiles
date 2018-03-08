@@ -1,4 +1,4 @@
-# Just my dotfiles
+# Just my dotfiles and scripts
 
 I was interested in conception of placing personal settings on github known from https://github.com/erikdubois. I'm trying to switch to linux for 10 years and this time I'm going to start seriously.
 Feel free to use if you find here something helpful.
