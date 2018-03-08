@@ -1,0 +1,36 @@
+0-1 CD
+cd "folder" 
+#go to folder "folder" where you whant to plce your local copy of repository#
+
+0-2 CLONE REPOSITORY
+git clone "repository_URL" 
+#clone git repository to "folder/repository_name"#
+
+0-3 CD
+cd "repository_name" 
+#go to folder "folder/repository_name" with your repository#
+
+0-4 CHEK STATUS
+git status
+#check sync status between server and local repository
+
+
+1-1 BEFORE EDIT SOMETHING
+git pull 
+#get all changes from server#
+
+
+2-1 AFTER EDIT SOMETHING - ADD CHANGES
+git add -A
+#add all edited files#
+#or#
+git add "filename"
+#add current edited file with "filename"#
+
+2-2 AFTER EDIT SOMETHING - commit changes
+git commit -m "comment"
+#add commit with "comment" message#
+
+2-3 AFTER EDIT SOMETHING
+git push
+#send changes to server#
