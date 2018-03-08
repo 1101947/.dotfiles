@@ -2,7 +2,7 @@
 set -e
 #======================================================================================
 # Author    : 1101947
-# Date      : 2018-03-27                               
+# Date      : 2018-04-08                               
 # Based on  : Erik Dubois at http://www.erikdubois.be
 # License   : Distributed under the terms of GNU GPL version 2 or later
 # 
@@ -16,8 +16,7 @@ echo "################################################################"
 echo "######################  Installing soft  #######################"
 echo "################################################################"
 
-sudo pacman -Sy
-sudo pacman -S firefox xfce4-terminal emacs pcmanfm --noconfirm --needed
+sudo pacman -Sy firefox terminator geany emacs pcmanfm --noconfirm --needed
 
 echo "################################################################"
 echo "########################    Ready    ###########################"
