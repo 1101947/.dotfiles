@@ -1,42 +1,31 @@
 0-1 CD
 cd "folder" 
 #go to folder "folder" where you whant to place your local copy of repository#
-
 0-2 CLONE REPOSITORY
 git clone "repository_URL" 
 #clone git repository to "folder/repository_name"#
-
-
 
 1-1 CD
 cd "repository_name" 
 #go to folder "folder/repository_name" with your repository#
 
-
-
-2-1 CHEK STATUS
-git status
-#check sync status between server and local repository#
-
-
-
-3-1 BEFORE EDIT SOMETHING
+2-1 BEFORE EDIT SOMETHING
 git pull 
 #get all changes from server#
 
-
-
-4-1 AFTER EDIT SOMETHING 1 - ADD CHANGES
+3-1 AFTER EDIT SOMETHING 1 - ADD CHANGES
 git add -A
 #add all edited files#
 #or#
 git add "filename"
 #add current edited file with "filename"#
-
-4-2 AFTER EDIT SOMETHING 2 - COMMIT CHANGES
+3-2 AFTER EDIT SOMETHING 2 - COMMIT CHANGES
 git commit -m "comment"
 #add commit with "comment" message#
-
-4-3 AFTER EDIT SOMETHING 3 - PUSH CHANGES
+3-3 AFTER EDIT SOMETHING 3 - PUSH CHANGES
 git push
 #send changes to server#
+
+4-1 CHEK STATUS
+git status
+#check sync status between server and local repository#
