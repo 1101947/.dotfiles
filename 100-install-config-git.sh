@@ -21,35 +21,32 @@ sudo apt install -y git
 ###############################################################################
 #
 # 1.This will set your global credentials
-# -replace MAIL with your git user email
-# -replace NAME with your git user name
+# -replace 10411@mail.ru with your git user email
+# -replace 1101947 with your git user name
 #
 ###############################################################################
 
-#git config --global user.email MAIL 
-#git config --global user.name NAME
+# git config --global user.email "10411@mail.ru" 
+# git config --global user.name "1101947"
 
 ##############################################################################
 #
-# 2.This will set storing your credentials with gnome-keyring
+# 2.This will set storing your credentials for 18000 seconds
 #
 ##############################################################################
 
-#sudo apt install -y libgnome-keyring-dev 
-#cd /usr/share/doc/git/contrib/credential/gnome-keyring
-#sudo make
-#git config --global credential.helper /usr/share/doc/git/contrib/credential/gnome-keyring/git-credential-gnome-keyring
+# git config --global credential.helper cache
+# git config --global credential.helper 'cache --timeout=18000'
 
 ##############################################################################
 #
 # 3.This will set the default push mode             
-# - to know more read this https://stackoverflow.com/questions/21839651/git-what-is-the-difference-between-push-default-matching-and-simple
 # - uncomment only one line!
 #
 ##############################################################################
 
-#git config --global push.default matching
-#git config --global push.default simple
+# git config --global push.default matching
+# git config --global push.default simple
 
 echo "#########################################"
 echo "   That's all! Thank You!  "
