@@ -18,7 +18,7 @@ echo "##################  Installing video support  ##################"
 echo "################################################################"
 
 sudo pacman -Sy
-sudo pacman -S xorg-apps xorg-server xorg-xinit --noconfirm --needed
+sudo pacman -S xorg --noconfirm --needed
 sudo pacman -S xf86-video-intel --noconfirm --needed
 sudo pacman -S mesa --noconfirm --needed
 
