@@ -100,5 +100,6 @@ echo
 echo
 echo "##################################################"
 echo "Latest possible version of i3 with gaps installed"
+echo "              That's all! Thank you!             "
 echo "##################################################"
 sleep 2
