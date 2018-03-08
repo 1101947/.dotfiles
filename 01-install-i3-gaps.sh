@@ -36,6 +36,8 @@ echo "dependencies for i3 with gaps installed"
 echo "#########################################"
 sleep 1
 
+echo " NEXT STEP "
+
 echo "###############################"
 echo "Xcb-util-xrm"
 echo "###############################"
@@ -58,11 +60,15 @@ echo "Xcb-util-xrm installed"
 echo "###############################"
 sleep 3
 
+echo " NEXT STEP "
+
 echo "##################################################"
 echo "Latest possible version of i3 with gaps"
 echo "##################################################"
 
 # installing i3 gap
+
+cd /tmp/
 
 rm -rf /tmp/Airblader
 
