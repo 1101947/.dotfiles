@@ -6,31 +6,37 @@ cd "folder"
 git clone "repository_URL" 
 #clone git repository to "folder/repository_name"#
 
-0-3 CD
+
+
+1-1 CD
 cd "repository_name" 
 #go to folder "folder/repository_name" with your repository#
 
-0-4 CHEK STATUS
+
+
+2-1 CHEK STATUS
 git status
 #check sync status between server and local repository#
 
 
-1-1 BEFORE EDIT SOMETHING
+
+3-1 BEFORE EDIT SOMETHING
 git pull 
 #get all changes from server#
 
 
-2-1 AFTER EDIT SOMETHING - ADD CHANGES
+
+4-1 AFTER EDIT SOMETHING 1 - ADD CHANGES
 git add -A
 #add all edited files#
 #or#
 git add "filename"
 #add current edited file with "filename"#
 
-2-2 AFTER EDIT SOMETHING - COMMIT CHANGES
+4-2 AFTER EDIT SOMETHING 2 - COMMIT CHANGES
 git commit -m "comment"
 #add commit with "comment" message#
 
-2-3 AFTER EDIT SOMETHING
+4-3 AFTER EDIT SOMETHING 3 - PUSH CHANGES
 git push
 #send changes to server#
