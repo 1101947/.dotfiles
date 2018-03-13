@@ -7,7 +7,7 @@ based on mattiaslundberg
 link https://gist.github.com/mattiaslundberg/8620837
 
 This command sequence will leave you with a fresh installed Arch Linux base console-only system with the following specifications,
-optimized for my needs. You can simply change/add/delete what you whant.
+optimized for my laptop needs. You can simply change/add/delete what you whant.
 Specifications:
 - UEFI with GRUB boot loader
 - single GPT disk with unencrypted boot partition, encrypted lvm partition,
