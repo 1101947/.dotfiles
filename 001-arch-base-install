@@ -6,18 +6,23 @@ date 2018-03-12
 based on mattiaslundberg
 link https://gist.github.com/mattiaslundberg/8620837
 
-This command order will leave you with a fresh installed arch base console-only system with the following specifications, optimized for my needs. You can simply change/add/delete what you whant.
+This command sequence will leave you with a fresh installed Arch Linux base console-only system with the following specifications,
+optimized for my needs. You can simply change/add/delete what you whant.
+Specifications:
 - UEFI with GRUB boot loader
-- single GPT disk with unencrypted boot partition, encrypted lvm partition, containig root and swap (change it's size as you need) volumes without a separate home partition or volume
-- Russian locale, console font and timezone (change it to your's)
+- single GPT disk with unencrypted boot partition, encrypted lvm partition,
+containig root and swap volumes (change their size as you need) without a separate home partition or volume
+- Russian locale, console font, keymap and timezone (change it to your's)
 - ready for properly working hibernation
-- installation is made via ssh connection to simplify coping and pasting commands on GUI based machine (you can simply miss steps needed to esteblish ssh connection)
+- installation is made through ssh connection to simplify coping and pasting commands on GUI based machine (you can simply skip 
+steps needed to establish ssh connection)
 
-WARNING! Read carefully before enter any command. This WILL DESTROY YOUR DATA! Please, backup what matters for you. A good way to try - use virtual machine.
+WARNING! Read carefully before enter any command. This WILL DESTROY YOUR DATA! Please, backup what matters for you. 
+A good way to try - use a virtual machine.
 
 # The official installation guide (https://wiki.archlinux.org/index.php/Installation_Guide) contains a more verbose description.
 
-# Download the archiso image from https://www.archlinux.org/
+# Download the archiso image from https://www.archlinux.org/download/
 # Copy to a usb-drive
 dd if=archlinux.img of=/dev/sdX bs=16M && sync # on linux
 
@@ -31,21 +36,24 @@ wifi-menu
 # Check internet connection
 ping -c 4 www.google.com
 
-# We’ll make installation procedure via ssh connection. This gives us advantage of using copy and paste commands. On Windows you can use Putty application for this purpose. On Mac or Linux use terminal. Before that set root password or ssh connetcion wouldn’t work. This password will exist only during installation. You don't need to use a strong one.
+# (Not nessesary). We’ll make installation procedure via ssh connection. This gives us the advantage of using copy and paste commands. 
+On Windows you can use Putty application for this purpose. On Mac or Linux use terminal. 
+Before that set root password or ssh connetcion wouldn’t work. This password will exist only during installation. 
+You don't need to use a strong one.
 passwd 
  type your temporary password, Enter
 
-# Enable ssh 
+# (Not nessesary). Enable ssh 
 systemctl start sshd
 
-#Discover ip adress to connect
+# (Not nessesary). Discover ip adress to connect
 ip addr | grep "scope global"
 #Ip will be written just after «inet»
 
-# On remote computer type in terminal (or putty on Windows)
+# (Not nessesary). On remote computer type in terminal (or putty on Windows)
 ssh root@your_ip
-# type “yes” and enter your root password
-# That’s all! Now you are able to copy and paste any command from remote machine
+ yes, type your root password, Enter
+# That’s it! Now you are able to copy and paste any command from remote machine
 
 # Remove old partition table
 sgdisk --zap-all /dev/sda
@@ -64,8 +72,8 @@ mkfs.ext2 /dev/sda2
 cryptsetup -c aes-xts-plain64 -y --use-random luksFormat /dev/sda3
 cryptsetup luksOpen /dev/sda3 luks
 
-# Create encrypted partitions
-# This creates one partions for root and one for swap, modify if /home or other partitions should be on separate partitions
+# Create encrypted volumes
+# This creates one volume for root and one for swap, modify if /home or other partitions should be on separate partitions
 pvcreate /dev/mapper/luks
 vgcreate vg0 /dev/mapper/luks
 lvcreate --size 8G vg0 --name swap
@@ -77,7 +85,7 @@ mkswap /dev/mapper/vg0-swap
 
 # Mount the new system 
 mount /dev/mapper/vg0-root /mnt # /mnt is the installed system
-swapon /dev/mapper/vg0-swap # Not needed but a good thing to test
+swapon /dev/mapper/vg0-swap # (Not nessesary).
 mkdir /mnt/boot
 mount /dev/sda2 /mnt/boot
 mkdir /mnt/boot/efi
@@ -85,7 +93,8 @@ mount /dev/sda1 /mnt/boot/efi
 
 # Install the system 
 pacstrap /mnt base base-devel
-# If after installation you can use only wireless connection you nesd to install some packages for this. Add 'iw wpa_supplicant dialog wpa_actiond' after 'base-devel'.
+# If after installation you can use only wireless connection, you need to install some packages for this. 
+Add 'iw wpa_supplicant dialog wpa_actiond' after 'base-devel'.
 
 # Generate fstab
 genfstab -pU /mnt >>/mnt/etc/fstab
@@ -104,20 +113,20 @@ rm /etc/localtime
 ln -s /usr/share/zoneinfo/Europe/Moscow /etc/localtime
 hwclock --systohc --utc
 
-# Update locale (chhose your)
+# Update locale (coose your)
 echo LANG=ru_RU.UTF-8 >> /etc/locale.conf
 echo LC_MESSAGES=ru_RU.UTF-8 >> /etc/locale.conf
 
-# Add locales (uncomment what you need)
+# Add locales 
 nano /etc/locale.gen
-#Uncomment
+# Uncomment (uncomment what you need)
 en_US.UTF-8
 ru_RU.UTF-8
  Ctrl+x, yes, Enter
 
-# Configure virtual console (paste your locale, keymap, timezone and console font)
+# Configure virtual console 
 nano /etc/vconsole.conf
-# Paste
+# Paste (replace your locale, keymap, timezone and console font)
 LOCALE="ru_RU.UTF-8"
 KEYMAP="ru"
 HARDWARECLOCK="UTC"
@@ -142,14 +151,13 @@ nano /etc/mkinitcpio.conf
 # Regenerate initrd image
 mkinitcpio -p linux
 
-# Setup grub
+# Install and configure grub
 pacman -S grub efibootmgr
 grub-install
-nano /etc/default/grub edit the line GRUB_CMDLINE_LINUX to GRUB_CMDLINE_LINUX="cryptdevice=/dev/sda3:luks:allow-discards resume=/dev/mapper/vg0-swap" 
+nano /etc/default/grub 
+# edit the line GRUB_CMDLINE_LINUX="" to GRUB_CMDLINE_LINUX="cryptdevice=/dev/sda3:luks:allow-discards resume=/dev/mapper/vg0-swap" 
  Ctrl+x, yes, Enter
 grub-mkconfig -o /boot/grub/grub.cfg
-
-
 
 # Exit new system and go into the cd shell
 exit
@@ -162,4 +170,3 @@ swapoff -a
 reboot
 
 # INSTALLATION COMPLETE!
-
