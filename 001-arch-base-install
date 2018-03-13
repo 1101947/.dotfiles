@@ -140,13 +140,13 @@ CONSOLEMAP=""
 # Generate locale
 locale-gen
 
-# Set password for root
+# Set password for root # This would be your permanent root password! Make it strong and remember or save it!
 passwd
 
 # Configure mkinitcpio with modules needed for the initrd image
 nano /etc/mkinitcpio.conf
 # Add 'ext4' to MODULES
-# Add 'encrypt', 'lvm2' and ‘resume’ to HOOKS before filesystems
+# Add 'encrypt', 'lvm2' and ‘resume’ to HOOKS before 'filesystems'
  Ctrl+x, yes, Enter
 
 # Regenerate initrd image
@@ -160,7 +160,7 @@ nano /etc/default/grub
  Ctrl+x, yes, Enter
 grub-mkconfig -o /boot/grub/grub.cfg
 
-# Exit new system and go into the cd shell
+# Exit new system and go into the live system shell
 exit
 
 # Unmount all partitions
