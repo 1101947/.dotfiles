@@ -55,7 +55,7 @@ ssh root@your_ip
  yes, type your root password, Enter
 # That’s it! Now you are able to copy and paste any command from remote machine
 
-# Remove old partition table
+# Remove old partition table # This step will destroy all data on /dev/sda! Make sure everything importanat is backed up!
 sgdisk --zap-all /dev/sda
 
 # Create partitions
@@ -74,12 +74,13 @@ cryptsetup luksOpen /dev/sda3 luks
 
 # Create encrypted volumes
 # This creates one volume for root and one for swap, modify if /home or other partitions should be on separate partitions
+# If you whant to use hibernation, swap volume size should be the same size (or little larger) as your RAM
 pvcreate /dev/mapper/luks
 vgcreate vg0 /dev/mapper/luks
 lvcreate --size 8G vg0 --name swap
 lvcreate -l +100%FREE vg0 --name root
 
-# Create filesystems on encrypted partitions
+# Create filesystems on encrypted volumes
 mkfs.ext4 /dev/mapper/vg0-root
 mkswap /dev/mapper/vg0-swap
 
