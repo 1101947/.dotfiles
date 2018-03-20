@@ -1,0 +1,24 @@
+BACKUP
+1. Boot from live usb
+ - Convention:
+   main hard drive name would be sda
+2. Connect external dive
+ - Convention:
+   external drive name would be sdX
+3. Mount sdX to /mnt
+   mount /dev/sdX /mnt
+4. Create folder to store backups
+   mkdir /mnt/backup
+5. Create compressed disk image
+   dd if=/dev/sda conv=sync,noerror bs=64K | gzip -с > /mnt/backup/fulldisk-01.img.gz
+RESTORE
+1. Boot from live usb
+ - Convention:
+   main hard drive name would be sda
+2. Connect external dive
+ - Convention:
+   external drive name would be sdX
+3. Mount sdX to /mnt
+   mount /dev/sdX /mnt
+4. Restore compressed image to disk
+   gunzip -c /mnt/backup/fulldisk-01.img.gz | dd of=/dev/sda
