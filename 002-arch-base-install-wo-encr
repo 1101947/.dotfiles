@@ -1,0 +1,159 @@
+Arch-linux-ssh-install-uefi-grub-hibernation
+
+by  1101947
+link https://github.com/1101947/.dotfiles
+date 2018-03-22
+based on mattiaslundberg
+link https://gist.github.com/mattiaslundberg/8620837
+
+This command sequence will leave you with a fresh installed Arch Linux base console-only system with the following specifications,
+optimized for my laptop needs. You can simply change/add/delete what you whant.
+Specifications:
+- UEFI with GRUB boot loader
+- single GPT disk with efi, boot, swap and root partitions without a separate home partition
+- Russian locale, console font, keymap and timezone (change it to your's)
+- ready for properly working hibernation
+- installation is made through ssh connection to simplify coping and pasting commands on GUI based machine (you can simply skip 
+steps needed to establish ssh connection)
+
+WARNING! Read carefully before enter any command. This WILL DESTROY YOUR DATA! Please, backup what matters for you. 
+A good way to try - use a virtual machine.
+
+# The official installation guide (https://wiki.archlinux.org/index.php/Installation_Guide) contains a more verbose description.
+
+# Download the archiso image from https://www.archlinux.org/download/
+# Copy to a usb-drive
+dd if=archlinux.img of=/dev/sdX bs=16M && sync # on linux
+
+# Boot from the usb. If the usb fails to boot, make sure that secure boot is disabled in the BIOS configuration.
+
+# To install Arch Linux you need internet connection. if you have a wired connection, it will start automatically 
+
+# If you have only wireless connections, connect to network with wifi-menu 
+wifi-menu
+
+# Check internet connection
+ping -c 4 www.google.com
+
+# (Not nessesary). We’ll make installation procedure via ssh connection. This gives us the advantage of using copy and paste commands. 
+On Windows you can use Putty application for this purpose. On Mac or Linux use terminal. 
+Before that set root password or ssh connetcion wouldn’t work. This password will exist only during installation. 
+You don't need to use a strong one.
+passwd 
+ type your temporary password, Enter
+
+# (Not nessesary). Enable ssh 
+systemctl start sshd
+
+# (Not nessesary). Discover ip adress to connect
+ip addr | grep "scope global"
+#Ip will be written just after «inet»
+
+# (Not nessesary). On remote computer type in terminal (or putty on Windows)
+ssh root@your_ip
+ yes, type your root password, Enter
+# That’s it! Now you are able to copy and paste any command from remote machine
+
+# Remove old partition table # This step will destroy all data on /dev/sda! Make sure everything importanat is backed up!
+sgdisk --zap-all /dev/sda
+
+# Create partitions
+cgdisk /dev/sda
+1 100MB EFI partition # Hex code ef00
+2 250MB Boot partition # Hex code 8300
+3 8GB   Swap partition # Hex code 8200
+4 100% size Root partiton # Hex code 8300
+
+# Create file systems on new partitions
+mkfs.vfat -F32 /dev/sda1
+mkfs.ext2 /dev/sda2
+mkswap /dev/sda3
+mkfs.ext4 /dev/sda4
+
+# Mount the new system 
+mount /dev/sda4 /mnt # /mnt is the installed system
+swapon /dev/sda3 # (Not nessesary).
+mkdir /mnt/boot
+mount /dev/sda2 /mnt/boot
+mkdir /mnt/boot/efi
+mount /dev/sda1 /mnt/boot/efi
+
+# Install the system 
+pacstrap /mnt base base-devel
+# If after installation you can use only wireless connection, you need to install some packages for this. 
+Add 'iw wpa_supplicant dialog wpa_actiond' after 'base-devel'.
+
+# Generate fstab
+genfstab -pU /mnt >>/mnt/etc/fstab
+
+# (Not nessesary). Check your fstab
+cat /mnt/etc/fstab
+
+# Enter the new system
+arch-chroot /mnt 
+
+# Set the hostname
+echo MYHOSTNAME > /etc/hostname
+
+# Setup system clock (choose your timezone)
+rm /etc/localtime
+ln -s /usr/share/zoneinfo/Europe/Moscow /etc/localtime
+hwclock --systohc --utc
+
+# Update locale (coose your)
+echo LANG=ru_RU.UTF-8 >> /etc/locale.conf
+echo LC_MESSAGES=ru_RU.UTF-8 >> /etc/locale.conf
+
+# Add locales 
+nano /etc/locale.gen
+# Uncomment (uncomment what you need)
+en_US.UTF-8
+ru_RU.UTF-8
+ Ctrl+x, yes, Enter
+
+# Configure virtual console 
+nano /etc/vconsole.conf
+# Paste (replace your locale, keymap, timezone and console font)
+LOCALE="ru_RU.UTF-8"
+KEYMAP="ru"
+HARDWARECLOCK="UTC"
+TIMEZONE="Europe/Moscow"
+FONT="cyr-sun16"
+CONSOLEFONT="cyr-sun16"
+CONSOLEMAP=""
+ Ctrl+x, yes, Enter
+
+# Generate locale
+locale-gen
+
+# Set password for root # This would be your permanent root password! Make it strong and remember or save it!
+passwd
+
+# Configure mkinitcpio with modules needed for the initrd image
+nano /etc/mkinitcpio.conf
+# Add 'ext4' to MODULES
+# Add ‘resume’ to HOOKS before 'filesystems'
+ Ctrl+x, yes, Enter
+
+# Regenerate initrd image
+mkinitcpio -p linux
+
+# Install and configure grub
+pacman -S grub efibootmgr
+grub-install
+nano /etc/default/grub 
+# edit the line GRUB_CMDLINE_LINUX="" to GRUB_CMDLINE_LINUX="resume=/dev/sda3" 
+ Ctrl+x, yes, Enter
+grub-mkconfig -o /boot/grub/grub.cfg
+
+# Exit new system and go into the live system shell
+exit
+
+# Unmount all partitions
+umount -R /mnt
+swapoff -a
+
+# Reboot into the new system, don't forget to remove the cd/usb
+reboot
+
+# INSTALLATION COMPLETE!
