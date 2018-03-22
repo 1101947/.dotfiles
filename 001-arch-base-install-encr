@@ -1,11 +1,16 @@
+--------------------------------------------------------------------------------------------------------------------------------
+
 Arch-linux-ssh-install-lvm-encrypt-uefi-grub-hibernation
+
+--------------------------------------------------------------------------------------------------------------------------------
+
 
 by  1101947
 link https://github.com/1101947/.dotfiles
 date 2018-03-12
 based on mattiaslundberg
 link https://gist.github.com/mattiaslundberg/8620837
-
+---------------------------------------------------------------------------------------------------------------------------------
 This command sequence will leave you with a fresh installed Arch Linux base console-only system with the following specifications,
 optimized for my laptop needs. You can simply change/add/delete what you whant.
 Specifications:
@@ -19,6 +24,7 @@ steps needed to establish ssh connection)
 
 WARNING! Read carefully before enter any command. This WILL DESTROY YOUR DATA! Please, backup what matters for you. 
 A good way to try - use a virtual machine.
+-----------------------------------------------------------------------------------------------------------------------------------
 
 # The official installation guide (https://wiki.archlinux.org/index.php/Installation_Guide) contains a more verbose description.
 
@@ -160,6 +166,58 @@ nano /etc/default/grub
  Ctrl+x, yes, Enter
 grub-mkconfig -o /boot/grub/grub.cfg
 
+-------------------------------------------------------------------------------
+
+ INSTALLATION COMPLETE!
+
+-------------------------------------------------------------------------------
+
+Now we shell add some postinstall steps.
+----------------------------------------
+
+# Enable networking. Installation guide says that it should work out of the box after base install. But in my case it didn't.  
+systemctl enable dhcpcd
+
+# Edit sources list to add multilib and aur support
+nano /etc/pacman.conf
+# Uncomment
+[multilib]
+Include = /etc/pacman.d/mirrorlist
+# Paste
+[archlinuxfr]
+SigLevel = Never
+Server = http://repo.archlinux.fr/$arch
+ Ctrl+x, yes, Enter
+
+# Update sources
+pacman -Sy 
+
+# Install some additional packages
+pacman -S bash-completion git reflector yaourt
+
+# Find fastest Arch Linux servers (worldwide)
+reflector -l 100 -f 50 --sort rate --threads 5 --verbose --save /tmp/mirrorlist.new
+rankmirrors -n 0 /tmp/mirrorlist.new > /tmp/mirrorlist
+cp /tmp/mirrorlist /etc/pacman.d
+# (or for Russia)
+reflector -l 100 -f 50 -c RU --sort rate --threads 5 --verbose --save /tmp/mirrorlist.new
+rankmirrors -n 0 /tmp/mirrorlist.new > /tmp/mirrorlist
+cp /tmp/mirrorlist /etc/pacman.d
+# Update
+pacman -Syu
+
+# Add user
+useradd -m -g users -G wheel,storage,power -s /bin/bash master
+
+# Add user password
+passwd master
+
+# Add root privilegues to your user
+EDITOR=nano visudo
+# Uncomment this line
+%wheel ALL=(ALL) ALL
+ Ctrl+x, yes, Enter
+
 # Exit new system and go into the live system shell
 exit
 
@@ -170,4 +228,10 @@ swapoff -a
 # Reboot into the new system, don't forget to remove the cd/usb
 reboot
 
-# INSTALLATION COMPLETE!
+----------------------------------------------------------------
+
+THAT'S ALL! THANK YOU!
+
+----------------------------------------------------------------
+
+

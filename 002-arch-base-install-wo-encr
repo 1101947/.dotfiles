@@ -182,9 +182,13 @@ pacman -Sy
 pacman -S bash-completion git reflector yaourt
 
 # Find fastest Arch Linux servers (worldwide)
-reflector -l 100 -f 50 --sort rate --threads 5 --verbose --save /tmp/mirrorlist.new && rankmirrors -n 0 /tmp/mirrorlist.new > /tmp/mirrorlist && cp /tmp/mirrorlist /etc/pacman.d
+reflector -l 100 -f 50 --sort rate --threads 5 --verbose --save /tmp/mirrorlist.new
+rankmirrors -n 0 /tmp/mirrorlist.new > /tmp/mirrorlist
+cp /tmp/mirrorlist /etc/pacman.d
 # (or for Russia)
-reflector -l 100 -f 50 -c RU --sort rate --threads 5 --verbose --save /tmp/mirrorlist.new && rankmirrors -n 0 /tmp/mirrorlist.new > /tmp/mirrorlist &&  cp /tmp/mirrorlist /etc/pacman.d
+reflector -l 100 -f 50 -c RU --sort rate --threads 5 --verbose --save /tmp/mirrorlist.new
+rankmirrors -n 0 /tmp/mirrorlist.new > /tmp/mirrorlist
+cp /tmp/mirrorlist /etc/pacman.d
 # Update
 pacman -Syu
 
