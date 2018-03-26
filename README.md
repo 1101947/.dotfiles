@@ -5,7 +5,7 @@ Feel free to use if you find here something helpful.
 
 ### About scripts
 
-Scriptss in root directory are written to use on fresh Arch Linux installation. My way - is testing new things on a virtual machine. *Please, read script's 
+Scripts in root directory are written to use on fresh Arch Linux installation. My way - is testing new things on a virtual machine. *Please, read script's 
 content before start it.*
 
 - 100-install-config-git.v2.sh script by default only configures git with my credentials. Change them to your's before starting script. If you need to install git first, uncomment appropriate command. In future plans I want to make it asking for credentials during setup.

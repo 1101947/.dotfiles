@@ -16,6 +16,7 @@ echo "################################################################"
 echo "############## Installing i3-gaps and components  ##############"
 echo "################################################################"
 
+sudo pacman -Sy
 sudo pacman -S i3-gaps i3status i3lock i3blocks dmenu --noconfirm --needed
 
 echo "################################################################"
