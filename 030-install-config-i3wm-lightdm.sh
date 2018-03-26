@@ -47,7 +47,7 @@ echo "#####################  Installing lightdm  #####################"
 echo "################################################################"
 
 sudo pacman -S lightdm lightdm-gtk-greeter --noconfirm --needed
-sudo systemctl enable lighdm.service
+sudo systemctl enable lightdm.service
 
 echo "################################################################"
 echo "###################   Lightdm installed  #######################"
