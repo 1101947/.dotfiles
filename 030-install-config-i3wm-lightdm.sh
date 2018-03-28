@@ -30,6 +30,7 @@ echo "################################################################"
 echo "############## Create symlinks to configurations  ##############"
 echo "################################################################"
 
+mkdir .config
 ln -s ~/.dotfiles/i3 ~/.config/i3
 ln -s ~/.dotfiles/i3/i3blocks.conf ~/.i3blocks.conf
 ln -s ~/.dotfiles/i3/i3status.conf ~/.i3status.conf
