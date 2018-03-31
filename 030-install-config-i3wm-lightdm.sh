@@ -17,7 +17,7 @@ echo "############## Installing i3-gaps and components  ##############"
 echo "################################################################"
 
 sudo pacman -Sy
-sudo pacman -S i3-gaps i3status i3lock i3blocks dmenu --noconfirm --needed
+sudo pacman -S i3-gaps i3lock i3blocks dmenu --noconfirm --needed
 
 echo "################################################################"
 echo "#####################    i3 installed    #######################"
@@ -32,8 +32,6 @@ echo "################################################################"
 
 mkdir .config
 ln -s ~/.dotfiles/i3 ~/.config/i3
-ln -s ~/.dotfiles/i3/i3blocks.conf ~/.i3blocks.conf
-ln -s ~/.dotfiles/i3/i3status.conf ~/.i3status.conf
 
 echo "################################################################"
 echo "###################    Symlinks created   ######################"
