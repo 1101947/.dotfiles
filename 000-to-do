@@ -1,8 +1,7 @@
-- touchpad settings
 - wallpaper management (variety?)
 - power management
 - gtk icons cursors fonts
-- terminal font and background
+- terminal config to dotfiles
 - i3 config
 - i3 lock
 - pamac
@@ -10,8 +9,6 @@
 - home folders
 - clipboard manager
 - cli soft
-	- emacs
-	- vim
 	- ranger
 	- rtorrent
 	- music player
