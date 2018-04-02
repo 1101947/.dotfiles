@@ -1,0 +1,5 @@
+style "default" {
+	engine "murrine" {
+		default_button_color = shade(0.96, @default_action_color)
+	}
+}

@@ -1,0 +1,24 @@
+/******************************************************/
+/*                  = Gtk-3 Tweaks =                  */
+/*    DO NOT CHANGE THE _ORDER_ OF THE LINES BELOW    */
+/* See 'Xfce Evolution/HACKING' file for instructions */
+/******************************************************/
+
+/* Colors */
+@define-color canvas_bg_color #e4e4d8;
+@define-color menu_bg_color #e4e4d8;
+@define-color selected_bg_color #778890;
+@define-color selected_fg_color #ffffff;
+@define-color selected_nofocus_fg_color #111111;
+@define-color default_action_color #8cbaf1;
+@define-color shift_bg_color #223311;
+
+/* Widgets, do _NOT_ edit */
+@import url("widgets.css");
+
+/* Appearance */
+@import "options/focus-rectangle-on.css";
+@import "options/default-button-bright.css";
+@import "options/menu-separator-dark.css";
+@import "options/tabs-flat.css";
+@import "options/panel-black.css";

@@ -1,0 +1,16 @@
+style "separator_menu_item" {
+	xthickness = 1
+	ythickness = 0
+
+	bg[NORMAL] = shade(0.5, @menu_bg_color)
+
+	GtkSeparatorMenuItem::horizontal-padding = 0
+	GtkWidget::wide-separators = 1
+	GtkWidget::separator-width = 1
+	GtkWidget::separator-height = 1
+	
+	engine "murrine" {
+		contrast = 0.75 /*1.7/1.8*/
+		separatorstyle = 0
+	}
+}

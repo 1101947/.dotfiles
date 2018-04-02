@@ -1,0 +1,5 @@
+style "default" {
+	engine "murrine" {
+		default_button_color = mix(0.5, mix(0.4, "#ffffff", @canvas_bg_color), mix(00.20, @shift_bg_color, @bg_color))
+	}
+}

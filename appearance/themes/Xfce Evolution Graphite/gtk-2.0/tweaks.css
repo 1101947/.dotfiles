@@ -1,0 +1,24 @@
+/******************************************************/
+/*                  = Gtk-2 Tweaks =                  */
+/*    DO NOT CHANGE THE _ORDER_ OF THE LINES BELOW    */
+/* See 'Xfce Evolution/HACKING' file for instructions */
+/******************************************************/
+
+/* Colors */
+gtk-color-scheme = "canvas_bg_color:#e4e4d8"
+gtk-color-scheme = "menu_bg_color:#e4e4d8"
+gtk-color-scheme = "selected_bg_color:#778890"
+gtk-color-scheme = "selected_fg_color:#ffffff"
+gtk-color-scheme = "selected_nofocus_fg_color:#111111"
+gtk-color-scheme = "default_action_color:#8cbaf1"
+gtk-color-scheme = "shift_bg_color:#223311"
+
+/* Widgets, do _not_ edit */
+include "widgets.css"
+
+/* Appearance */
+include "options/focus-rectangle-on.css"
+include "options/default-button-bright.css"
+include "options/menu-separator-dark.css"
+include "options/tabs-flat.css"
+include "options/panel-black.css"
