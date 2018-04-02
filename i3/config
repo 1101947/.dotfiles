@@ -276,9 +276,6 @@ bindsym $mod+Return exec xfce4-terminal;focus
 # network
 exec wicd-client --tray
 
-# pamac
-exec pamac-tray
-
 # Keyboard map
 exec setxkbmap "us,ru" ",winkeys" "grp:caps_toggle,grp_led:caps,terminate:ctrl_alt_bksp" -option "shift:both_capslock"
 
