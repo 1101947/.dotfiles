@@ -1,6 +1,0 @@
-menu separator, .csd menu separator,
-.menu separator, .csd .menu separator {
-  background: shade(@menu_bg_color, 0.88);
-  color:  shade(@menu_bg_color, 0.88);
-  margin: 0px 1px 0px 1px;
-}

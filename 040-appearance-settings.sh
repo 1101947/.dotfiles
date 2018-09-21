@@ -17,37 +17,11 @@ echo "################################################################"
 echo "######### Copying themes and icons to system folders  ##########"
 echo "################################################################"
 
-sudo cp -r ~/.dotfiles/appearance/themes/* /usr/share/themes
-sudo cp -r ~/.dotfiles/appearance/icons/* /usr/share/icons
+sudo cp -r appearance/themes/* /usr/share/themes
+sudo cp -r appearance/icons/* /usr/share/icons
 
 echo "################################################################"
 echo "#################    Themes and icons copyed    ################"
-echo "################################################################"
-
-# Copy themes and icons to system folders
-
-echo "################################################################"
-echo "######### Copying themes and icons to system folders  ##########"
-echo "################################################################"
-
-sudo cp -r ~/.dotfiles/appearance/themes/* /usr/share/themes
-sudo cp -r ~/.dotfiles/appearance/icons/* /usr/share/icons
-
-echo "################################################################"
-echo "#################    Themes and icons copyed    ################"
-echo "################################################################"
-
-
-# Install gtk-engine-murrine
-
-echo "################################################################"
-echo "##################     Installing murrine engine  #########################"
-echo "################################################################"
-
-sudo pacman -S gtk-engine-murrine
-
-echo "################################################################"
-echo "####################    Murrine engine intalled    ########################"
 echo "################################################################"
 
 
@@ -57,10 +31,8 @@ echo "################################################################"
 echo "#################     Creating symlinks   ######################"
 echo "################################################################"
 
-ln -s ~/.dotfiles/appearance/.gtkrc-2.0 ~/.gtkrc-2.0
-ln -s ~/.dotfiles/appearance/gtk-3.0/ ~/.config/gtk-3.0
-ln -s ~/.dotfiles/appearance/themes/ ~/.themes
-ln -s ~/.dotfiles/appearance/icons/ ~/.icons
+ln -s appearance/.gtkrc-2.0 ~/.gtkrc-2.0
+ln -s appearance/gtk-3.0/ ~/.config/gtk-3.0
 
 echo "################################################################"
 echo "###################    Symlinks created   ######################"

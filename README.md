@@ -5,15 +5,12 @@ Feel free to use if you find here something helpful.
 
 ### About scripts
 
-Scripts in root directory are written to use on fresh Arch Linux installation. My way - is testing new things on a virtual machine. *Please, read script's 
+Scripts in root directory are written to use on fresh Crunchbang++ installation. My way - is testing new things on a virtual machine. *Please, read script's 
 content before start it.*
 
 - 100-install-config-git.v2.sh script by default only configures git with my credentials. Change them to your's before starting script. If you need to install git first, uncomment appropriate command. In future plans I want to make it asking for credentials during setup.
 
 ### About scripts in archive folder
 
-These scripts were created and sucsessfully tested on Linux Mint 18.3 XFCE, but also may work in other ubuntu- and may be, with some edits, in debian-based distributions. *And, of course, read them before execute.*
-
-- 100-mint-install-config-git.sh script by default only installs git. To configure your git installation you should edit it. All comments are inside.
-
-- 200-mint-install-i3-gaps.sh script automaticaly installs all dependencies and the latest git version of i3wm with gaps.
+Some of these scripts were created and sucsessfully tested on Linux Mint 18.3 XFCE, but also may work in other ubuntu- and may be, with some edits, in debian-based distributions. Others are tested on Arch linux. *And, of course, read them before execute.*
+Also there are some old config examples
