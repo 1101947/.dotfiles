@@ -16,7 +16,7 @@ echo "#################     Creating symlinks   ######################"
 echo "################################################################"
 
 mv ~/.config/openbox ~/.config/openbox.old
-ln -s openbox ~/.config
+ln openbox ~/.config
 
 echo "################################################################"
 echo "###################    Symlinks created   ######################"
